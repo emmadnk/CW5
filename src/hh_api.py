@@ -1,6 +1,10 @@
 import requests
 
-def get_companies():
+
+def get_companies() -> list:
+    """
+    Получение названия компаний и их ID
+    """
     companies_data = {
         'Тиньков': 78638,
         'Яндекс': 1740,
@@ -23,7 +27,11 @@ def get_companies():
 
     return data
 
-def get_vacancies(data):
+
+def get_vacancies(data: list) -> list[dict]:
+    """
+    Получение информации о компаниях
+    """
     vacancies = []
     for company in data:
         company_id = company["company_id"]
@@ -36,7 +44,11 @@ def get_vacancies(data):
             print(f"Ошибка при запросе компании {company["company_name"]}: {response.status_code}")
     return vacancies
 
-def get_vacancy_list(data):
+
+def get_vacancy_list(data: list) -> list[dict]:
+    """
+    Преобразование информации о компаниях для дальнейшей работы с БД
+    """
     vacancy_list = []
     for item in data:
         company_name = item["employer"]["name"]

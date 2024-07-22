@@ -14,6 +14,9 @@ conn = psycopg2.connect(dbname="top_vacancies", **params)
 save_data_to_db(vacancies, "top_vacancies", params)
 
 def interfaсe():
+    """
+    Функция для взаимодейтсвия с пользователем
+    """
     db_manager = DBManager("top_vacancies", params)
     print(f"Выберите запрос: \n"
           f"1 - Список всех компаний и количество вакансий у каждой компании\n"
@@ -35,7 +38,8 @@ def interfaсe():
         vacancies_with_higher_salary = db_manager.get_vacancies_with_higher_salary()
         print(f"Список всех вакансий, у которых зарплата выше средней по всем вакансиям: {vacancies_with_higher_salary}\n")
     elif user_answer == "5":
-        vacancies_with_keyword = db_manager.get_vacancies_with_keyword()
+        user_input = input(f'Введите слово: ')
+        vacancies_with_keyword = db_manager.get_vacancies_with_keyword(user_input)
         print(f"Список всех вакансий, в названии которых содержатся запрашиваемое слово: {vacancies_with_keyword}")
     else:
         print("Введен неверный запрос")
